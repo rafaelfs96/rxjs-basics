@@ -1,11 +1,11 @@
 const fs = require('fs')
-const pathModule = require('path')
+const path = require('path')
 
-function readDir(path) {
+function readDir(dir) {
   return new Promise((resolve, reject) => {
     try {
-      const files = fs.readdirSync(path)
-      const completeFiles = files.map(f => pathModule.join(path, f))
+      const files = fs.readdirSync(dir)
+      const completeFiles = files.map(file => path.join(dir, file))
       resolve(completeFiles)
     } catch (e) {
       reject(e)
@@ -14,10 +14,10 @@ function readDir(path) {
 }
 
 
-function readFile(path) {
+function readFile(dir) {
   return new Promise((resolve, reject) => {
     try {
-      const content = fs.readFileSync(path, { encoding: 'utf-8' })
+      const content = fs.readFileSync(dir, { encoding: 'utf-8' })
       resolve(content.toString())
     } catch (e) {
       reject(e)
